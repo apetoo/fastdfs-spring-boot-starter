@@ -31,12 +31,15 @@ FastDFS Java Client(for SpringBoot1.x & SpringBoot 2.x).
     </dependency>
     ```
 
-* Add annotations (``@EnableFastdfsClient``).
+* Add annotations and service (``@EnableFastdfsClient``).
 
     ```java
     @EnableFastdfsClient
     @SpringBootApplication
     public class DemoApplication {
+    
+        @Autowired
+        private FastdfsClientService fastdfsClientService;
     
         public static void main(String[] args) {
             SpringApplication.run(DemoApplication.class, args);
