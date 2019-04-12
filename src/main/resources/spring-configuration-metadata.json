@@ -34,7 +34,8 @@
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
       "description": "If use token to anti-steal, default value is false (0).",
       "defaultValue": false
-    },{
+    },
+    {
       "name": "http_secret_key",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
@@ -47,12 +48,55 @@
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
       "description": "Tracker server http port, default value is 80.",
       "defaultValue": 80
-    },{
+    },
+    {
       "name": "tracker_server",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
       "description": "Tracker server ip address, use commas(,) to separate multiple names, default value is 192.168.80.3:22122.",
       "defaultValue": "192.168.80.3:22122"
+    },
+    {
+      "name": "tracker_server_max_total",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
+      "description": "Tracker server connection pool max total, default value is 18.",
+      "defaultValue": "18"
+    },
+    {
+      "name": "storage_client_max_total",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
+      "description": "Storage client connection pool max total, default value is 18.",
+      "defaultValue": "18"
+    },
+    {
+      "name": "tracker_server_max_idle",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
+      "description": "Tracker server connection pool max idle, default value is 18.",
+      "defaultValue": "18"
+    },
+    {
+      "name": "storage_client_max_idle",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
+      "description": "Storage client connection pool max idle, default value is 18.",
+      "defaultValue": "18"
+    },
+    {
+      "name": "tracker_server_min_idle",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
+      "description": "Tracker server connection pool min idle, default value is 3.",
+      "defaultValue": "3"
+    },
+    {
+      "name": "storage_client_min_idle",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
+      "description": "Storage client connection pool min idle, default value is 3.",
+      "defaultValue": "3"
     }
   ],
   "hints": [

@@ -1,31 +1,31 @@
 # fastdfs-spring-boot-starter
 
-一个同时兼容SpringBoot1.x和2.x的高性能FastDFS客户端.
+FastDFS Java Client(for SpringBoot1.x & SpringBoot 2.x).
 
-* 自动添加依赖
+* Import dependence
 
-* 初始化配置项
+* Initial configuration
 
-* 基于Commons Pool2 实现的高性能连接池（正在实现）
+* Connection pool(in progress)
 
-* 更多操作FastDFS的API（未完成）
+* More method(unfinished)
 
-# 快速开始
+# Quick start
 
-* 下载.
+* Download.
 
     ```bash
     git clone https://github.com/bluemiaomiao/fastdfs-spring-boot-starter.git
     cd fastdfs-spring-boot-starter
     ```
 
-* 安装到本地仓库.
+* Install to local repository.
 
     ```bash
     mvn clean install
     ```
     
-* 添加到项目.
+* Add to project.
 
     ```xml
     <dependency>
@@ -35,7 +35,7 @@
     </dependency>
     ```
 
-* 在主配置类上添加注解 (``@EnableFastdfsClient``).
+* Add annotations and service (``@EnableFastdfsClient``).
 
     ```java
     @EnableFastdfsClient
@@ -50,7 +50,7 @@
         }
     }
     ```
-* 添加配置条目(application.properties).
+* Add configuration entries(application.properties).
 
     ```properties
     fastdfs.connect-timeout=5
@@ -62,7 +62,7 @@
     fastdfs.http-anti-steal-token=true
     ```
 
-* 添加配置条目(application.yml).
+* Add configuration entries(application.yml).
 
     ```yml
     fastdfs:
@@ -75,4 +75,4 @@
       charset: UTF-8
     ```
     
-* 即刻享受它带来的便利.
+* Enjoy it.
