@@ -8,14 +8,11 @@ package com.bluemiaomiao.autoconfiguration;
 
 import com.bluemiaomiao.properties.FastdfsProperties;
 import com.bluemiaomiao.service.FastdfsClientService;
-import org.csource.common.FastdfsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.IOException;
 
 @Configuration
 @EnableConfigurationProperties(FastdfsProperties.class)
@@ -25,7 +22,7 @@ public class FastdfsAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(FastdfsClientService.class)
-    public FastdfsClientService fastdfsClientService() throws IOException, FastdfsException {
+    public FastdfsClientService fastdfsClientService() throws Exception {
         return new FastdfsClientService(fastdfsProperties);
     }
 }

@@ -11,35 +11,29 @@
       "name": "connect_timeout",
       "type": "java.lang.Integer",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Connect timeout in seconds, default value is 5.",
       "defaultValue": 5
     },
     {
       "name": "network_timeout",
       "type": "java.lang.Integer",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Network timeout in seconds, default value is 30.",
       "defaultValue": 30
     },
     {
       "name": "charset",
       "type": "java.lang.String",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Charset, default value is UTF-8.",
       "defaultValue": "UTF-8"
     },
     {
       "name": "http_anti_steal_token",
       "type": "java.lang.Boolean",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "If use token to anti-steal, default value is false (0).",
       "defaultValue": false
     },
     {
       "name": "http_secret_key",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Secret key to generate anti-steal token, this parameter must be set when http.anti_steal.check_token set to true, the length of the secret key should not exceed 128 bytes.",
       "defaultValue": "FastDFS1234567890"
     },
     {
@@ -53,113 +47,36 @@
       "name": "tracker_server",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Tracker server ip address, use commas(,) to separate multiple names, default value is 192.168.80.3:22122.",
       "defaultValue": "192.168.80.3:22122"
     },
     {
-      "name": "tracker_server_max_total",
+      "name": "connection_pool_max_total",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Tracker server connection pool max total, default value is 18.",
       "defaultValue": "18"
     },
     {
-      "name": "storage_client_max_total",
+      "name": "connection_pool_max_idle",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Storage client connection pool max total, default value is 18.",
       "defaultValue": "18"
     },
     {
-      "name": "tracker_server_max_idle",
+      "name": "connection_pool_min_idle",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Tracker server connection pool max idle, default value is 18.",
-      "defaultValue": "18"
-    },
-    {
-      "name": "storage_client_max_idle",
-      "type": "java.lang.String",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Storage client connection pool max idle, default value is 18.",
-      "defaultValue": "18"
-    },
-    {
-      "name": "tracker_server_min_idle",
-      "type": "java.lang.String",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Tracker server connection pool min idle, default value is 3.",
-      "defaultValue": "3"
-    },
-    {
-      "name": "storage_client_min_idle",
-      "type": "java.lang.String",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Storage client connection pool min idle, default value is 3.",
-      "defaultValue": "3"
+      "defaultValue": "2"
     }
   ],
   "hints": [
-    {
-      "name": "connect_timeout",
-      "values": [
-        {
-          "value": 5,
-          "description": ""
-        }
-      ]
-    },
-    {
-      "name": "network_timeout",
-      "values": [
-        {
-          "value": 30,
-          "description": ""
-        }
-      ]
-    },
-    {
-      "name": "charset",
-      "values": [
-        {
-          "value": "UTF-8",
-          "description": ""
-        }
-      ]
-    },
     {
       "name": "http_anti_steal_token",
       "values": [
         {
           "value": false,
-          "description": ""
-        }
-      ]
-    },
-    {
-      "name": "http_secret_key",
-      "values": [
+        },
         {
-          "value": "FastDFS1234567890",
-          "description": ""
-        }
-      ]
-    },
-    {
-      "name": "http_tracker_http_port",
-      "values": [
-        {
-          "value": 80,
-          "description": ""
-        }
-      ]
-    },
-    {
-      "name": "tracker_server",
-      "values": [
-        {
-          "value": "192.168.80.3:22122",
-          "description": ""
+          "value": true,
         }
       ]
     }

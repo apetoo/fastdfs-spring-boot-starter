@@ -36,6 +36,11 @@ public class StorageClient {
         this.storageServer = null;
     }
 
+    // 增加获取TrackerServer的方法
+    public TrackerServer getTrackerServer() {
+        return this.trackerServer;
+    }
+
     /**
      * constructor with tracker server and storage server
      *
