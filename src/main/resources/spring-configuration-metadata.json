@@ -66,6 +66,12 @@
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
       "defaultValue": "2"
+    },
+    {
+      "name": "nginx_server",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
+      "defaultValue": "192.168.80.3:8000"
     }
   ],
   "hints": [

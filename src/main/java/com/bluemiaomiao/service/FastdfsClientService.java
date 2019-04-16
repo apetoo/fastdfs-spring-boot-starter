@@ -79,7 +79,10 @@ public class FastdfsClientService {
      * @return 文件组名和ID
      */
     public String[] upload(String localFileName, String fileExtName, NameValuePair[] metadata) throws Exception {
-        return null;
+        StorageClient client = this.pool.borrowObject();
+        final String[] strings = client.upload_file(localFileName, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -91,8 +94,11 @@ public class FastdfsClientService {
      * @param waitTimeMillis 获取连接等待时间
      * @return 文件组名和ID
      */
-    public String[] upload(String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
+    public String[] upload(String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) throws Exception {
+        StorageClient client = this.pool.borrowObject(waitTimeMillis);
+        final String[] strings = client.upload_file(localFileName, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -104,9 +110,12 @@ public class FastdfsClientService {
      * @param metadata      文件的元数据
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, String localFileName, String fileExtName, NameValuePair[] metadata) {
-        return null;
-    }
+    // public String[] upload(String groupName, String localFileName, String fileExtName, NameValuePair[] metadata) throws Exception{
+    //     StorageClient client = this.pool.borrowObject();
+    //     String[] strings = client.upload_file(groupName, localFileName, fileExtName, metadata);
+    //     this.pool.returnObject(client);
+    //     return strings;
+    // }
 
     /**
      * 通过本地文件上传
@@ -118,9 +127,9 @@ public class FastdfsClientService {
      * @param waitTimeMillis 获取连接等待时间
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
-    }
+    // public String[] upload(String groupName, String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
+    //     return null;
+    // }
 
     /**
      * 通过本地文件上传
@@ -132,9 +141,9 @@ public class FastdfsClientService {
      * @param metadata      文件的元数据
      * @return 文件组名和ID
      */
-    public String[] upload(byte command, String groupName, String localFileName, String fileExtName, NameValuePair[] metadata) {
-        return null;
-    }
+    // public String[] upload(byte command, String groupName, String localFileName, String fileExtName, NameValuePair[] metadata) {
+    //     return null;
+    // }
 
     /**
      * 通过本地文件上传
@@ -147,9 +156,9 @@ public class FastdfsClientService {
      * @param waitTimeMillis 获取连接的等待时间
      * @return 文件组名和ID
      */
-    public String[] upload(byte command, String groupName, String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
-    }
+    // public String[] upload(byte command, String groupName, String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
+    //     return null;
+    // }
 
     /**
      * 通过字节数组上传文件
@@ -161,8 +170,11 @@ public class FastdfsClientService {
      * @param metadata    文件的元数据
      * @return 文件组名和ID
      */
-    public String[] upload(byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata) {
-        return null;
+    public String[] upload(byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata) throws Exception {
+        StorageClient client = this.pool.borrowObject();
+        String[] strings = client.upload_file(buff, offset, len, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -176,8 +188,11 @@ public class FastdfsClientService {
      * @param waitTimeMillis 获取连接的等待时间
      * @return 文件组名和ID
      */
-    public String[] upload(byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
+    public String[] upload(byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) throws Exception {
+        StorageClient client = this.pool.borrowObject(waitTimeMillis);
+        String[] strings = client.upload_file(buff, offset, len, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -191,8 +206,11 @@ public class FastdfsClientService {
      * @param metadata    文件的元数据
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata) {
-        return null;
+    public String[] upload(String groupName, byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata) throws Exception {
+        StorageClient client = this.pool.borrowObject();
+        String[] strings = client.upload_file(groupName, buff, offset, len, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -207,8 +225,11 @@ public class FastdfsClientService {
      * @param waitTimeMillis 获取连接的等待时间
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
+    public String[] upload(String groupName, byte[] buff, int offset, int len, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) throws Exception {
+        StorageClient client = this.pool.borrowObject(waitTimeMillis);
+        String[] strings = client.upload_file(groupName, buff, offset, len, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -219,8 +240,11 @@ public class FastdfsClientService {
      * @param metadata    元数据
      * @return 文件组名和ID
      */
-    public String[] upload(byte[] fileBuff, String fileExtName, NameValuePair[] metadata) {
-        return null;
+    public String[] upload(byte[] fileBuff, String fileExtName, NameValuePair[] metadata) throws Exception {
+        StorageClient client = this.pool.borrowObject();
+        String[] strings = client.upload_file(fileBuff, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -232,8 +256,11 @@ public class FastdfsClientService {
      * @param waitTimeMillis 获取连接的等待时间
      * @return 文件组名和ID
      */
-    public String[] upload(byte[] fileBuff, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
+    public String[] upload(byte[] fileBuff, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) throws Exception {
+        StorageClient client = this.pool.borrowObject(waitTimeMillis);
+        String[] strings = client.upload_file(fileBuff, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -245,8 +272,11 @@ public class FastdfsClientService {
      * @param metadata    元数据
      * @return 文件的组名和ID
      */
-    public String[] upload(String groupName, byte[] fileBuff, String fileExtName, NameValuePair[] metadata) {
-        return null;
+    public String[] upload(String groupName, byte[] fileBuff, String fileExtName, NameValuePair[] metadata) throws Exception {
+        StorageClient client = this.pool.borrowObject();
+        String[] strings = client.upload_file(groupName, fileBuff, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -259,8 +289,11 @@ public class FastdfsClientService {
      * @param waitTimeMillis 等待连接的时长
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, byte[] fileBuff, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
+    public String[] upload(String groupName, byte[] fileBuff, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) throws Exception {
+        StorageClient client = this.pool.borrowObject(waitTimeMillis);
+        String[] strings = client.upload_file(groupName, fileBuff, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -273,8 +306,11 @@ public class FastdfsClientService {
      * @param metadata    元数据
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, long fileSize, UploadCallback callback, String fileExtName, NameValuePair[] metadata) {
-        return null;
+    public String[] upload(String groupName, long fileSize, UploadCallback callback, String fileExtName, NameValuePair[] metadata) throws Exception {
+        StorageClient client = this.pool.borrowObject();
+        String[] strings = client.upload_file(groupName, fileSize, callback, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -288,8 +324,11 @@ public class FastdfsClientService {
      * @param waitTimeMillis 等待连接的时长
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, long fileSize, UploadCallback callback, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
+    public String[] upload(String groupName, long fileSize, UploadCallback callback, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) throws Exception {
+        StorageClient client = this.pool.borrowObject(waitTimeMillis);
+        String[] strings = client.upload_file(groupName, fileSize, callback, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -303,8 +342,11 @@ public class FastdfsClientService {
      * @param metadata       元数据
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, String masterFileName, String prefixName, String localFileName, String fileExtName, NameValuePair[] metadata) {
-        return null;
+    public String[] upload(String groupName, String masterFileName, String prefixName, String localFileName, String fileExtName, NameValuePair[] metadata) throws Exception {
+        StorageClient client = this.pool.borrowObject();
+        String[] strings = client.upload_file(groupName, masterFileName, prefixName, localFileName, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
@@ -319,8 +361,11 @@ public class FastdfsClientService {
      * @param waitTimeMillis 等待连接的时长
      * @return 文件组名和ID
      */
-    public String[] upload(String groupName, String masterFileName, String prefixName, String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) {
-        return null;
+    public String[] upload(String groupName, String masterFileName, String prefixName, String localFileName, String fileExtName, NameValuePair[] metadata, long waitTimeMillis) throws Exception {
+        StorageClient client = this.pool.borrowObject(waitTimeMillis);
+        String[] strings = client.upload_file(groupName, masterFileName, prefixName, localFileName, fileExtName, metadata);
+        this.pool.returnObject(client);
+        return strings;
     }
 
     /**
