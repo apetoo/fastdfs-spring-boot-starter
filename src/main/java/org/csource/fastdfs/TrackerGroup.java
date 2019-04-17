@@ -9,6 +9,7 @@
 package org.csource.fastdfs;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -102,5 +103,13 @@ public class TrackerGroup {
         }
 
         return new TrackerGroup(trackerServers);
+    }
+
+    public String getTracker_servers() {
+        StringBuilder builder = null;
+        for (InetSocketAddress address : tracker_servers) {
+            builder.append(address.toString()).append(", ");
+        }
+        return builder.toString();
     }
 }
