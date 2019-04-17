@@ -18,6 +18,9 @@ import com.bluemiaomiao.properties.FastdfsProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -104,22 +107,32 @@ public class FastdfsClientService {
      * @param address 客户端IP地址
      * @return 可用的服务器地址
      */
-    private String getServer(String[] servers, String address) {
+    private String getNginxServer(String[] servers, String address) {
         int size = servers.length;
         int i = address.hashCode();
         int index = abs(i % size);
         return servers[index];
     }
 
-    public String autoDownload() {
-        return null;
+    /**
+     * 带有防盗链的下载
+     * @param fileGroup 文件组名
+     * @param remoteFileName 远程文件名称
+     * @param clientIpAddress 客户端IP地址
+     * @return 完整的URL地址
+     */
+    public String autoDownloadWithToken(String fileGroup, String remoteFileName, String clientIpAddress) throws Exception {
+        int ts = (int) (System.currentTimeMillis() / 1000);
+        String token = ProtoCommon.getToken(remoteFileName, ts, ClientGlobal.getG_secret_key());
+        String nginx = this.getNginxServer(this.nginxServers, clientIpAddress);
+        return "http://" + nginx + "/" + fileGroup + "/" + remoteFileName + "?token=" + token + "&ts=" + ts;
     }
 
     public String autoUpload() {
         return null;
     }
 
-    public String autoDownloadWithToken() {
+    public String autoDownloadWithoutToken() {
         return null;
     }
 
