@@ -6,9 +6,9 @@
 
 * 初始化配置项
 
-* 基于Commons Pool2 实现的高性能连接池（正在实现）
+* 基于Commons Pool2 实现的高性能连接池
 
-* 更多操作FastDFS的API（未完成）
+* 更多操作FastDFS的API（正在实现）
 
 # 快速开始
 

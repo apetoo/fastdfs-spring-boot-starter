@@ -6,9 +6,9 @@ FastDFS Java Client(for SpringBoot1.x & SpringBoot 2.x).
 
 * Initial configuration
 
-* Connection pool(in progress)
+* Connection pool
 
-* More method(unfinished)
+* More method(in process)
 
 # Quick start
 
