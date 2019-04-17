@@ -104,12 +104,4 @@ public class TrackerGroup {
 
         return new TrackerGroup(trackerServers);
     }
-
-    public String getTracker_servers() {
-        StringBuilder builder = null;
-        for (InetSocketAddress address : tracker_servers) {
-            builder.append(address.toString()).append(", ");
-        }
-        return builder.toString();
-    }
 }

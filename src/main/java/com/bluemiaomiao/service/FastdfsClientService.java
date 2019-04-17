@@ -18,7 +18,7 @@ import com.bluemiaomiao.properties.FastdfsProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 
 import static java.lang.Math.abs;
@@ -42,6 +42,7 @@ public class FastdfsClientService {
         this.logger = LoggerFactory.getLogger(getClass());
         init();
         create();
+        info();
     }
 
     /**
@@ -49,17 +50,26 @@ public class FastdfsClientService {
      */
     private void init() throws Exception {
         this.prop = new Properties();
-        this.prop.put("fastdfs.connect_timeout_in_seconds", this.fdfsProp.getConnect_timeout());
-        this.prop.put("fastdfs.network_timeout_in_seconds", this.fdfsProp.getNetwork_timeout());
+        this.logger.info("FastDFS: reading config file...");
+        this.logger.info("FastDFS: fastdfs.connect_timeout_in_seconds=" + this.fdfsProp.getConnectTimeout());
+        this.logger.info("FastDFS: fastdfs.network_timeout_in_seconds=" + this.fdfsProp.getNetworkTimeout());
+        this.logger.info("FastDFS: fastdfs.charset=" + this.fdfsProp.getCharset());
+        this.logger.info("FastDFS: fastdfs.http_anti_steal_token=" + this.fdfsProp.getHttpAntiStealToken());
+        this.logger.info("FastDFS: fastdfs.http_secret_key=" + this.fdfsProp.getHttpSecretKey());
+        this.logger.info("FastDFS: fastdfs.http_tracker_http_port=" + this.fdfsProp.getHttpTrackerHttpPort());
+        this.logger.info("FastDFS: fastdfs.tracker_servers=" + this.fdfsProp.getTrackerServers());
+        this.logger.info("FastDFS: fastdfs.connection_pool_max_total=" + this.fdfsProp.getConnectionPoolMaxTotal());
+        this.logger.info("FastDFS: fastdfs.connection_pool_max_idle=" + this.fdfsProp.getConnectionPoolMaxIdle());
+        this.logger.info("FastDFS: fastdfs.connection_pool_min_idle=" + this.fdfsProp.getConnectionPoolMinIdle());
+        this.logger.info("FastDFS: fastdfs.nginx_servers=" + this.fdfsProp.getNginxServers());
+
+        this.prop.put("fastdfs.connect_timeout_in_seconds", this.fdfsProp.getConnectTimeout());
+        this.prop.put("fastdfs.network_timeout_in_seconds", this.fdfsProp.getNetworkTimeout());
         this.prop.put("fastdfs.charset", this.fdfsProp.getCharset());
-        this.prop.put("fastdfs.http_anti_steal_token", this.fdfsProp.getHttp_anti_steal_token());
-        this.prop.put("fastdfs.http_secret_key", this.fdfsProp.getHttp_secret_key());
-        this.prop.put("fastdfs.http_tracker_http_port", this.fdfsProp.getHttp_tracker_http_port());
-        this.prop.put("fastdfs.tracker_servers", this.fdfsProp.getTracker_server());
-        this.prop.put("fastdfs.connection_pool_max_total", this.fdfsProp.getConnection_pool_max_total());
-        this.prop.put("fastdfs.connection_pool_max_idle", this.fdfsProp.getConnection_pool_max_idle());
-        this.prop.put("fastdfs.connection_pool_min_idle", this.fdfsProp.getConnection_pool_min_idle());
-        this.prop.put("fastdfs.nginx_server", this.fdfsProp.getNginx_server());
+        this.prop.put("fastdfs.http_anti_steal_token", this.fdfsProp.getHttpAntiStealToken());
+        this.prop.put("fastdfs.http_secret_key", this.fdfsProp.getHttpSecretKey());
+        this.prop.put("fastdfs.http_tracker_http_port", this.fdfsProp.getHttpTrackerHttpPort());
+        this.prop.put("fastdfs.tracker_servers", this.fdfsProp.getTrackerServers());
         ClientGlobal.initByProperties(this.prop);
     }
 
@@ -67,17 +77,24 @@ public class FastdfsClientService {
      * 显示初始化信息
      */
     private void info() {
-        this.logger.info("ConnectTimeoutInSeconds ==> " + ClientGlobal.getG_connect_timeout());
-        this.logger.info("NetworkTimeoutInSeconds ==> " + ClientGlobal.getG_network_timeout());
-        this.logger.info("Charset ==> " + ClientGlobal.getG_charset());
-        this.logger.info("HTTPAntiStealToken ==> " + ClientGlobal.getG_anti_steal_token());
-        this.logger.info("HTTPSecretKey ==> " + ClientGlobal.getG_secret_key());
-        this.logger.info("HTTPTrackerHttpPort ==> " + ClientGlobal.getG_tracker_http_port());
-        this.logger.info("TrackerServers ==> " + ClientGlobal.getG_tracker_servers());
-        this.logger.info("ConnectionPoolMaxTotal ==> " + this.prop.getProperty("fastdfs.connection_pool_max_total"));
-        this.logger.info("ConnectionPoolMaxIdle ==> " + this.prop.getProperty("fastdfs.connection_pool_max_idle"));
-        this.logger.info("ConnectionPoolMinIdle ==> " + this.prop.getProperty("fastdfs.connection_pool_min_idle"));
-        this.logger.info("NginxServer ==> " + this.prop.getProperty("fastdfs.nginx_server"));
+        this.logger.info("FastDFS parameter: ConnectionPoolMaxTotal ==> " + this.pool.getMaxTotal());
+        this.logger.info("FastDFS parameter: ConnectionPoolMaxIdle ==> " + this.pool.getMaxIdle());
+        this.logger.info("FastDFS parameter: ConnectionPoolMinIdle ==> " + this.pool.getMinIdle());
+        this.logger.info("FastDFS parameter: NginxServer ==> " + Arrays.toString(this.nginxServers));
+        this.logger.info(ClientGlobal.configInfo());
+    }
+
+    /**
+     * 创建连接池
+     */
+    private void create() {
+        this.config = new GenericObjectPoolConfig();
+        this.config.setMaxTotal(Integer.parseInt(this.fdfsProp.getConnectionPoolMaxTotal()));
+        this.config.setMaxIdle(Integer.parseInt(this.fdfsProp.getConnectionPoolMaxIdle()));
+        this.config.setMinIdle(Integer.parseInt(this.fdfsProp.getConnectionPoolMinIdle()));
+        StorageClientFactory factory = new StorageClientFactory();
+        this.pool = new GenericObjectPool<StorageClient>(factory, this.config);
+        this.nginxServers = this.fdfsProp.getNginxServers().split(",");
     }
 
     /**
@@ -87,26 +104,23 @@ public class FastdfsClientService {
      * @param address 客户端IP地址
      * @return 可用的服务器地址
      */
-    private String getServer(ArrayList<String> servers, String address) {
-        // 获取服务器的数量
-        int size = servers.size();
-        // 获取Hash值
+    private String getServer(String[] servers, String address) {
+        int size = servers.length;
         int i = address.hashCode();
         int index = abs(i % size);
-        return servers.get(index);
+        return servers[index];
     }
 
-    /**
-     * 创建连接池
-     */
-    private void create() {
-        this.config = new GenericObjectPoolConfig();
-        this.config.setMaxTotal(Integer.parseInt(this.prop.getProperty("fastdfs.connection_pool_max_totol")));
-        this.config.setMaxIdle(Integer.parseInt(this.prop.getProperty("fastdfs.connection_pool_max_idle")));
-        this.config.setMinIdle(Integer.parseInt(this.prop.getProperty("fastdfs.connection_pool_min_idle")));
-        StorageClientFactory factory = new StorageClientFactory();
-        this.pool = new GenericObjectPool<StorageClient>(factory, this.config);
-        this.nginxServers = this.prop.getProperty("fastdfs.nginx_server").split(";");
+    public String autoDownload() {
+        return null;
+    }
+
+    public String autoUpload() {
+        return null;
+    }
+
+    public String autoDownloadWithToken() {
+        return null;
     }
 
 

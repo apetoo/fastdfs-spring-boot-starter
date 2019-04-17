@@ -278,10 +278,6 @@ public class ClientGlobal {
         return g_tracker_group;
     }
 
-    public static String getG_tracker_servers() {
-        return g_tracker_group.getTracker_servers();
-    }
-
     public static void setG_tracker_group(TrackerGroup tracker_group) {
         ClientGlobal.g_tracker_group = tracker_group;
     }

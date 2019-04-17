@@ -8,16 +8,16 @@
   ],
   "properties": [
     {
-      "name": "connect_timeout",
-      "type": "java.lang.Integer",
+      "name": "connectTimeout",
+      "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "defaultValue": 5
+      "defaultValue": "5"
     },
     {
-      "name": "network_timeout",
-      "type": "java.lang.Integer",
+      "name": "networkTimeout",
+      "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "defaultValue": 30
+      "defaultValue": "30"
     },
     {
       "name": "charset",
@@ -25,53 +25,48 @@
       "defaultValue": "UTF-8"
     },
     {
-      "name": "http_anti_steal_token",
-      "type": "java.lang.Boolean",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "http_secret_key",
+      "name": "httpAntiStealToken",
       "type": "java.lang.String",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "defaultValue": "FastDFS1234567890"
+      "defaultValue": "false"
     },
     {
-      "name": "http_tracker_http_port",
+      "name": "httpSecretKey",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties"
+    },
+    {
+      "name": "httpTrackerHttpPort",
+      "type": "java.lang.Integer",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties"
+    },
+    {
+      "name": "trackerServers",
+      "type": "java.lang.String",
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties"
+    },
+    {
+      "name": "connectionPoolMaxTotal",
       "type": "java.lang.Integer",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "description": "Tracker server http port, default value is 80.",
-      "defaultValue": 80
+      "defaultValue": "18"
     },
     {
-      "name": "tracker_server",
-      "type": "java.lang.String",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "defaultValue": "192.168.80.3:22122"
-    },
-    {
-      "name": "connection_pool_max_total",
-      "type": "java.lang.String",
+      "name": "connectionPoolMaxIdle",
+      "type": "java.lang.Integer",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
       "defaultValue": "18"
     },
     {
-      "name": "connection_pool_max_idle",
-      "type": "java.lang.String",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "defaultValue": "18"
-    },
-    {
-      "name": "connection_pool_min_idle",
-      "type": "java.lang.String",
+      "name": "connectionPoolMinIdle",
+      "type": "java.lang.Integer",
       "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
       "defaultValue": "2"
     },
     {
-      "name": "nginx_server",
+      "name": "nginxServers",
       "type": "java.lang.String",
-      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties",
-      "defaultValue": "192.168.80.3:8000"
+      "sourceType": "com.bluemiaomiao.properties.FastdfsProperties"
     }
   ],
   "hints": [
@@ -79,10 +74,10 @@
       "name": "http_anti_steal_token",
       "values": [
         {
-          "value": false,
+          "value": "false"
         },
         {
-          "value": true,
+          "value": "true"
         }
       ]
     }
