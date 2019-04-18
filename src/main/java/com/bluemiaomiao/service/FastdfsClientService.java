@@ -92,6 +92,7 @@ public class FastdfsClientService {
      */
     private void create() {
         this.config = new GenericObjectPoolConfig();
+        this.logger.info("FastDFS Client: Creating connection pool...");
         this.config.setMaxTotal(Integer.parseInt(this.fdfsProp.getConnectionPoolMaxTotal()));
         this.config.setMaxIdle(Integer.parseInt(this.fdfsProp.getConnectionPoolMaxIdle()));
         this.config.setMinIdle(Integer.parseInt(this.fdfsProp.getConnectionPoolMinIdle()));
@@ -116,8 +117,9 @@ public class FastdfsClientService {
 
     /**
      * 带有防盗链的下载
-     * @param fileGroup 文件组名
-     * @param remoteFileName 远程文件名称
+     *
+     * @param fileGroup       文件组名
+     * @param remoteFileName  远程文件名称
      * @param clientIpAddress 客户端IP地址
      * @return 完整的URL地址
      */
@@ -128,12 +130,33 @@ public class FastdfsClientService {
         return "http://" + nginx + "/" + fileGroup + "/" + remoteFileName + "?token=" + token + "&ts=" + ts;
     }
 
-    public String autoUpload() {
-        return null;
+    /**
+     * 上传文件，适合上传图片
+     *
+     * @param buffer 字节数组
+     * @param ext    扩展名
+     * @return 文件组名和ID
+     */
+    public String[] autoUpload(byte[] buffer, String ext) throws Exception {
+        String[] upload = this.upload(buffer, ext, null);
+        return upload;
     }
 
-    public String autoDownloadWithoutToken() {
-        return null;
+    /**
+     * 不带防盗链的下载，如果开启防盗链会导致该方法抛出异常
+     *
+     * @param fileGroup       文件组名
+     * @param remoteFileName  远程文件ID
+     * @param clientIpAddress 客户端IP地址，根据客户端IP来分配Nginx服务器
+     * @return 完整的URL地址
+     */
+    public String autoDownloadWithoutToken(String fileGroup, String remoteFileName, String clientIpAddress) throws Exception {
+        if (ClientGlobal.getG_anti_steal_token()) {
+            this.logger.error("FastDFS Client: You've turned on Token authentication.");
+            throw new Exception("You've turned on Token authentication.");
+        }
+        String nginx = this.getNginxServer(this.nginxServers, clientIpAddress);
+        return "http://" + nginx + fileGroup + "/" + remoteFileName;
     }
 
 
