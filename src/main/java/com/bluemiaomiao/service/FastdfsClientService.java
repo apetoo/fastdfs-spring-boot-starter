@@ -18,9 +18,6 @@ import com.bluemiaomiao.properties.FastdfsProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.UnsupportedEncodingException;
-import java.net.InetSocketAddress;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Properties;
 

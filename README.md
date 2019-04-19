@@ -8,7 +8,7 @@
 
 * 基于Commons Pool2 实现的高性能连接池
 
-* 更多操作FastDFS的API（正在实现）
+* 更多操作FastDFS的API
 
 # 快速开始
 
@@ -53,26 +53,34 @@
 * 添加配置条目(application.properties).
 
     ```properties
-    fastdfs.connect-timeout=5
-    fastdfs.network-timeout=30
-    fastdfs.charset=UTF-8
-    fastdfs.http-tracker-http-port=8000
-    fastdfs.tracker-server=192.168.80.3:22122
-    fastdfs.http-secret-key=lzsdfbgdiuxfbKFGKUygboYFOUYDgi
+    fastdfs.nginx-servers=192.168.80.2:8000,192.168.80.3:8000,192.168.80.4:8000
+    fastdfs.tracker-servers=192.168.80.2:22122,192.168.80.3:22122,192.168.80.4:22122
+    fastdfs.http-secret-key=2scPwMPctXhbLVOYB0jyuyQzytOofmFCBIYe65n56PPYVWrntxzLIDbPdvDDLJM8QHhKxSGWTcr+9VdG3yptkw
     fastdfs.http-anti-steal-token=true
+    fastdfs.http-tracker-http-port=8080
+    fastdfs.network-timeout=30
+    fastdfs.connect-timeout=5
+    fastdfs.connection-pool-max-idle=18
+    fastdfs.connection-pool-min-idle=2
+    fastdfs.connection-pool-max-total=18
+    fastdfs.charset=UTF-8
     ```
 
 * 添加配置条目(application.yml).
 
-    ```yml
+    ```yaml
     fastdfs:
-      tracker-server: 192.168.80.3:22122
-      http-tracker-http-port: 8000
-      http-anti-steal-token: true
-      network-timeout: 5
-      http-secret-key: LKUGDuyfgUyfgouiygFVuyfoUFVIOuyf
-      connect-timeout: 5
       charset: UTF-8
+      connect-timeout: 5
+      http-secret-key: 2scPwMPctXhbLVOYB0jyuyQzytOofmFCBIYe65n56PPYVWrntxzLIDbPdvDDLJM8QHhKxSGWTcr+9VdG3yptkw
+      network-timeout: 30
+      http-anti-steal-token: true
+      http-tracker-http-port: 8080
+      connection-pool-max-idle: 20
+      connection-pool-max-total: 20
+      connection-pool-min-idle: 2
+      nginx-servers: 192.168.80.2:8000,192.168.80.3:8000,192.168.80.4:8000
+      tracker-servers: 192.168.80.2:22122,192.168.80.3:22122,192.168.80.4:22122
     ```
     
 * 即刻享受它带来的便利.
